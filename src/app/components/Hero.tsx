@@ -30,6 +30,25 @@ export function Hero() {
 
 
 
+  const handleDownloadResume = async () => {
+    try {
+      const response = await fetch("/resume/Sidhartha_Vyas_Resume.pdf");
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "Sidhartha_Vyas_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Error downloading resume:", error);
+      // Fallback
+      window.open("/resume/Sidhartha_Vyas_Resume.pdf", "_blank");
+    }
+  };
+
   return (
     <section
       id="hero"
@@ -179,11 +198,8 @@ export function Hero() {
         style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap", justifyContent: "center" }}
         className="hero-ctas"
       >
-        <a
-          href="/resume/Sidhartha_Vyas_Resume.pdf"
-          download="Sidhartha_Vyas_Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
+        <button
+          onClick={handleDownloadResume}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -197,14 +213,13 @@ export function Hero() {
             fontFamily: "Inter, sans-serif",
             border: "none",
             cursor: "pointer",
-            textDecoration: "none",
             transition: "opacity 0.2s, transform 0.2s",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
           <FileText size={15} /> Download Resume
-        </a>
+        </button>
       </motion.div>
 
       {/* Stats row */}
