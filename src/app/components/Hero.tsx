@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import { ArrowDown, Github, FileText } from "lucide-react";
+import { ArrowDown, FileText } from "lucide-react";
 import { COLORS } from "../data/portfolio";
 
 const words = ["backend systems", "scalable APIs", "real-time platforms", "AI-powered tools"];
@@ -28,10 +28,7 @@ export function Hero() {
     return () => clearInterval(cycle);
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+
 
   return (
     <section
@@ -182,13 +179,16 @@ export function Hero() {
         style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap", justifyContent: "center" }}
         className="hero-ctas"
       >
-        <button
-          onClick={() => scrollTo("projects")}
+        <a
+          href="/resume/Sidhartha_Vyas_Resume.pdf"
+          download="Sidhartha_Vyas_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             display: "inline-flex",
             alignItems: "center",
             gap: 8,
-            padding: "12px 24px",
+            padding: "12px 28px",
             borderRadius: 8,
             backgroundColor: COLORS.accent,
             color: "#0a0a0b",
@@ -197,61 +197,14 @@ export function Hero() {
             fontFamily: "Inter, sans-serif",
             border: "none",
             cursor: "pointer",
+            textDecoration: "none",
             transition: "opacity 0.2s, transform 0.2s",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
-          View Projects
-        </button>
-
-        <a
-          href="/resume/Sidhartha_Vyas_Resume.pdf"
-          download="Sidhartha_Vyas_Resume.pdf"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "12px 24px",
-            borderRadius: 8,
-            backgroundColor: "transparent",
-            color: COLORS.text,
-            fontSize: 14,
-            fontWeight: 500,
-            fontFamily: "Inter, sans-serif",
-            border: `1px solid ${COLORS.border}`,
-            cursor: "pointer",
-            textDecoration: "none",
-            transition: "border-color 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.borderColor = COLORS.accent)}
-          onMouseLeave={(e) => (e.currentTarget.style.borderColor = COLORS.border)}
-        >
           <FileText size={15} /> Download Resume
         </a>
-
-        <button
-          onClick={() => scrollTo("contact")}
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            padding: "12px 24px",
-            borderRadius: 8,
-            backgroundColor: "transparent",
-            color: COLORS.muted,
-            fontSize: 14,
-            fontWeight: 500,
-            fontFamily: "Inter, sans-serif",
-            border: `1px solid ${COLORS.border}`,
-            cursor: "pointer",
-            transition: "color 0.2s",
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.color = COLORS.text)}
-          onMouseLeave={(e) => (e.currentTarget.style.color = COLORS.muted)}
-        >
-          Contact
-        </button>
       </motion.div>
 
       {/* Stats row */}
