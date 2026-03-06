@@ -28,27 +28,6 @@ export function Hero() {
     return () => clearInterval(cycle);
   }, []);
 
-
-
-  const handleDownloadResume = async () => {
-    try {
-      const response = await fetch("/resume/Sidhartha_Vyas_Resume.pdf");
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "Sidhartha_Vyas_Resume.pdf";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("Error downloading resume:", error);
-      // Fallback
-      window.open("/resume/Sidhartha_Vyas_Resume.pdf", "_blank");
-    }
-  };
-
   return (
     <section
       id="hero"
@@ -73,7 +52,8 @@ export function Hero() {
             linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px)
           `,
           backgroundSize: "60px 60px",
-          maskImage: "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
+          maskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%)",
         }}
       />
 
@@ -108,7 +88,14 @@ export function Hero() {
           marginBottom: 32,
         }}
       >
-        <div style={{ width: 7, height: 7, borderRadius: "50%", backgroundColor: COLORS.accent }} />
+        <div
+          style={{
+            width: 7,
+            height: 7,
+            borderRadius: "50%",
+            backgroundColor: COLORS.accent,
+          }}
+        />
         <span
           style={{
             color: COLORS.accent,
@@ -187,7 +174,8 @@ export function Hero() {
           maxWidth: 520,
         }}
       >
-        Building reliable backend systems, real-time architectures, and AI-powered platforms.
+        Building reliable backend systems, real-time architectures, and
+        AI-powered platforms.
       </motion.p>
 
       {/* CTAs */}
@@ -195,11 +183,20 @@ export function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, delay: 0.65 }}
-        style={{ display: "flex", gap: 12, marginTop: 40, flexWrap: "wrap", justifyContent: "center" }}
+        style={{
+          display: "flex",
+          gap: 12,
+          marginTop: 40,
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
         className="hero-ctas"
       >
-        <button
-          onClick={handleDownloadResume}
+        <a
+          href="/resume/Sidhartha_Vyas_Resume.pdf"
+          download="Sidhartha_Vyas_Resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -214,12 +211,13 @@ export function Hero() {
             border: "none",
             cursor: "pointer",
             transition: "opacity 0.2s, transform 0.2s",
+            textDecoration: "none",
           }}
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
           <FileText size={15} /> Download Resume
-        </button>
+        </a>
       </motion.div>
 
       {/* Stats row */}
@@ -252,7 +250,14 @@ export function Hero() {
             >
               {stat.value}
             </div>
-            <div style={{ fontSize: 12, color: COLORS.muted, fontFamily: "Inter, sans-serif", marginTop: 4 }}>
+            <div
+              style={{
+                fontSize: 12,
+                color: COLORS.muted,
+                fontFamily: "Inter, sans-serif",
+                marginTop: 4,
+              }}
+            >
               {stat.label}
             </div>
           </div>
