@@ -90,7 +90,7 @@ export const projects = [
       "Social goal sharing",
     ],
     github: "https://github.com/Sidharthavyas/GoalSocial",
-    demo: null,
+    demo: "https://goal-social.vercel.app/",
     category: "Full-Stack",
   },
   {
@@ -124,7 +124,7 @@ export const projects = [
       "Responsive product storefront",
     ],
     github: "https://github.com/Sidharthavyas/Nidsscrochet",
-    demo: "https://nidsscrochet-shopping.vercel.app",
+    demo: "https://www.nidsscrochet.in/",
     category: "Full-Stack",
   },
 ];
