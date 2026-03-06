@@ -1,0 +1,164 @@
+/* ============================================
+   RESPONSIVE OVERRIDES
+   Mobile-first responsive design fixes
+   ============================================ */
+
+/* ---- Global ---- */
+html {
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- Mobile: < 640px ---- */
+@media (max-width: 639px) {
+
+  /* Hero buttons stack vertically */
+  .hero-ctas {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    width: 100%;
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-ctas>* {
+    justify-content: center !important;
+  }
+
+  /* About: single column */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+
+  /* About pillars: single column */
+  .about-pillars {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Contact quick actions: single column */
+  .contact-actions {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Projects: single column, fix minmax */
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* GitHub stats: 2x2 grid */
+  .github-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* GitHub bottom grid */
+  .github-bottom {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* GitHub featured repos */
+  .github-repos {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Skills grid */
+  .skills-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Contact info cards */
+  .contact-cards {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* Hero stats row */
+  .hero-stats {
+    gap: 24px !important;
+  }
+
+  .hero-stats>div {
+    min-width: 0 !important;
+  }
+
+  /* Reduce padding on sections */
+  section {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  /* Navigation: hide desktop links, show hamburger */
+  .nav-desktop {
+    display: none !important;
+  }
+
+  .nav-mobile-toggle {
+    display: flex !important;
+  }
+
+  /* Heatmap overflow */
+  .heatmap-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* GitHub repos min-width override */
+  .github-repos {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ---- Desktop: > 768px — hide hamburger, show links ---- */
+@media (min-width: 768px) {
+  .nav-mobile-toggle {
+    display: none !important;
+  }
+}
+
+/* ---- Tablet: 640px - 1023px ---- */
+@media (min-width: 640px) and (max-width: 1023px) {
+
+  /* About: stack on tablet too */
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 48px !important;
+  }
+
+  /* Projects: single column on tablet */
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* GitHub bottom: stack */
+  .github-bottom {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ---- Small mobile: < 400px ---- */
+@media (max-width: 399px) {
+  .github-stats {
+    grid-template-columns: 1fr !important;
+  }
+
+  .contact-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .hero-stats {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+}
