@@ -25,7 +25,7 @@ export const experience = [
     role: "Software Developer",
     company: "DATRAX Services Pvt. Ltd.",
     location: "Mumbai",
-    period: "Nov 2025 – Present",
+    period: "Nov 2025 – Mar 2026",
     deployment: "Deployed at Sapphire Foods India Ltd. for KFC operations",
     highlights: [
       "Built MPNC (Material Planning and Consumption), a backend platform for inventory tracking and demand forecasting",
