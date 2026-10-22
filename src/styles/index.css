@@ -28,3 +28,9 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(34, 211, 238, 0.4);
 }
+/* Dark page background so iOS overscroll and the nav slide-in never flash white */
+html,
+body {
+  background-color: #09090b;
+  color-scheme: dark;
+}

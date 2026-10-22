@@ -1,8 +1,7 @@
-import { useMemo } from "react";
 import { motion } from "motion/react";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 import { Github, GitBranch, Flame, Calendar, Star, Loader2, WifiOff, Wifi } from "lucide-react";
-import { COLORS, generateContributionData, projects } from "../data/portfolio";
+import { COLORS, LINKS, projects } from "../data/portfolio";
 import { useGitHubData } from "../hooks/useGitHubData";
 
 const heatmapColors = [
@@ -14,14 +13,18 @@ const heatmapColors = [
 ];
 
 const codeQualities = [
-  { label: "Backend API architecture", tag: "FastAPI / Node.js / Express" },
-  { label: "Real-time WebSocket systems", tag: "Socket.IO / Redis pub/sub" },
-  { label: "SQL query optimization", tag: "PostgreSQL / SQL Server" },
-  { label: "ML model integration", tag: "HuggingFace / Gemini API" },
-  { label: "Production deployments", tag: "Docker / Vercel / Cloud" },
+  { label: "Backend API design", tag: "FastAPI / Node.js / Next.js" },
+  { label: "Transactions & state machines", tag: "MongoDB / SQL Server" },
+  { label: "LLM pipelines with fallback", tag: "LangGraph / Gemini / Groq" },
+  { label: "On-device AI", tag: "Gemma 3 / whisper.cpp" },
+  { label: "Automation & integrations", tag: "n8n / webhooks / Docker" },
 ];
 
-const featuredRepos = projects.filter((p) => ["cyberguard", "goalsocial", "nidsscrochet"].includes(p.id));
+const fmt = (v: number | string | null | undefined) =>
+  v === null || v === undefined ? "–" : typeof v === "number" ? v.toLocaleString() : v;
+
+// Only projects with a public repo, so every card links somewhere real
+const featuredRepos = projects.filter((p) => p.github && ["remi", "marketpulse", "flow"].includes(p.id));
 
 // Skeleton loading block
 function SkeletonBlock({ width = "100%", height = 20 }: { width?: string | number; height?: number }) {
@@ -40,8 +43,7 @@ function SkeletonBlock({ width = "100%", height = 20 }: { width?: string | numbe
 }
 
 export function GitHubAnalytics() {
-  const contributionData = useMemo(() => generateContributionData(), []);
-  const { stats, languages, loading, isLive } = useGitHubData();
+  const { stats, languages, contributions, loading, isLive } = useGitHubData();
 
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
@@ -123,10 +125,10 @@ export function GitHubAnalytics() {
                 ) : (
                   <WifiOff size={11} />
                 )}
-                {loading ? "fetching…" : isLive ? "live" : "cached"}
+                {loading ? "fetching…" : isLive ? "live" : "offline"}
               </div>
               <a
-                href="https://github.com/Sidharthavyas"
+                href={LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -172,10 +174,10 @@ export function GitHubAnalytics() {
           className="github-stats"
         >
           {[
-            { icon: <GitBranch size={18} />, value: stats.totalCommits.toLocaleString(), label: "Contributions" },
-            { icon: <Github size={18} />, value: stats.totalRepos, label: "Repositories" },
-            { icon: <Flame size={18} />, value: `${stats.longestStreak}d`, label: "Longest Streak" },
-            { icon: <Star size={18} />, value: stats.totalStars || stats.mostActiveYear, label: stats.totalStars ? "Total Stars" : "Most Active Year" },
+            { icon: <GitBranch size={18} />, value: fmt(stats.totalCommits), label: "Contributions (last year)" },
+            { icon: <Github size={18} />, value: fmt(stats.totalRepos), label: "Public repositories" },
+            { icon: <Flame size={18} />, value: stats.longestStreak === null ? "–" : `${stats.longestStreak}d`, label: "Longest streak" },
+            { icon: <Star size={18} />, value: stats.totalStars || (stats.mostActiveYear === null ? "–" : String(stats.mostActiveYear)), label: stats.totalStars ? "Total stars" : "Most active year" },
           ].map((stat) => (
             <motion.div
               key={stat.label}
@@ -250,39 +252,40 @@ export function GitHubAnalytics() {
           </div>
 
           <div style={{ overflowX: "auto" }} className="heatmap-container">
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                gap: 3,
-                minWidth: 680,
-              }}
-            >
-              {contributionData.map((week, wIdx) => (
-                <div
-                  key={wIdx}
-                  style={{ display: "flex", flexDirection: "column", gap: 3, flex: 1 }}
-                >
-                  {week.map((level, dIdx) => (
-                    <div
-                      key={`${wIdx}-${dIdx}`}
-                      title={`Week ${wIdx + 1}, Day ${dIdx + 1}: ${level * 2} commits`}
-                      style={{
-                        width: "100%",
-                        height: 10,
-                        borderRadius: 2,
-                        backgroundColor: heatmapColors[level],
-                        border: `1px solid rgba(255,255,255,0.03)`,
-                        cursor: "default",
-                        transition: "transform 0.1s",
-                      }}
-                      onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.3)")}
-                      onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
+            {contributions.length > 0 ? (
+              <div style={{ display: "flex", flexDirection: "row", gap: 3, minWidth: 680 }}>
+                {contributions.map((week, wIdx) => (
+                  <div key={wIdx} style={{ display: "flex", flexDirection: "column", gap: 3, flex: 1 }}>
+                    {week.map((day, dIdx) => (
+                      <div
+                        key={`${wIdx}-${dIdx}`}
+                        title={day ? `${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date}` : undefined}
+                        style={{
+                          width: "100%",
+                          height: 10,
+                          borderRadius: 2,
+                          backgroundColor: day ? heatmapColors[Math.min(day.level, 4)] : "transparent",
+                          border: day ? `1px solid rgba(255,255,255,0.03)` : "none",
+                          cursor: "default",
+                          transition: "transform 0.1s",
+                        }}
+                        onMouseEnter={(e) => day && (e.currentTarget.style.transform = "scale(1.3)")}
+                        onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+                      />
+                    ))}
+                  </div>
+                ))}
+              </div>
+            ) : loading ? (
+              <SkeletonBlock height={96} />
+            ) : (
+              <p style={{ color: COLORS.muted, fontSize: 13, fontFamily: "Inter, sans-serif", margin: 0 }}>
+                Contribution data couldn't be loaded right now.{" "}
+                <a href={LINKS.github} target="_blank" rel="noopener noreferrer" style={{ color: COLORS.accent }}>
+                  See it on GitHub
+                </a>
+              </p>
+            )}
           </div>
         </motion.div>
 
@@ -320,7 +323,11 @@ export function GitHubAnalytics() {
                 <span style={{ fontSize: 9, color: "#22c55e", fontWeight: 400 }}>● from GitHub</span>
               )}
             </div>
-            {loading ? (
+            {!loading && languages.length === 0 ? (
+              <p style={{ color: COLORS.muted, fontSize: 13, fontFamily: "Inter, sans-serif", margin: "20px 0 0" }}>
+                Language data couldn't be loaded right now.
+              </p>
+            ) : loading ? (
               <div style={{ display: "flex", flexDirection: "column", gap: 12, padding: "20px 0" }}>
                 {[1, 2, 3, 4, 5].map((i) => (
                   <SkeletonBlock key={i} height={16} />
@@ -549,10 +556,10 @@ export function GitHubAnalytics() {
               margin: "0 0 16px",
             }}
           >
-            Sidhartha actively builds backend systems and full-stack applications. His repositories demonstrate experience with real-time platforms, scalable APIs, and AI-based applications.
+            Sidhartha builds backend systems, AI pipelines and full-stack apps in public. His repositories cover multi-agent LLM pipelines, offline on-device AI, transaction-safe backends and real-time platforms.
           </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {["Backend Architecture", "Distributed Systems", "Real-time Applications", "Production Deployments"].map(
+            {["Backend systems", "LLM pipelines", "On-device AI", "Real-time apps"].map(
               (tag) => (
                 <span
                   key={tag}

@@ -1,13 +1,33 @@
 import { motion } from "motion/react";
 import { Github, ExternalLink, ArrowRight } from "lucide-react";
 import { Link } from "react-router";
-import { projects, COLORS } from "../data/portfolio";
+import { projects, caseStudies, COLORS } from "../data/portfolio";
 
 const categoryColors: Record<string, string> = {
   "AI / Backend": "#fb7185",
+  "AI / Agents": "#fb7185",
+  "AI / Mobile": "#f59e0b",
+  "AI / Voice": "#f59e0b",
   "Full-Stack": "#34d399",
   "Enterprise Backend": "#a78bfa",
 };
+
+const featured = projects.filter((p) => p.featured);
+const more = projects.filter((p) => !p.featured);
+const MAX_TECH = 6;
+
+const iconLink = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: 32,
+  height: 32,
+  borderRadius: 6,
+  border: `1px solid ${COLORS.border}`,
+  color: COLORS.muted,
+  textDecoration: "none",
+  transition: "color 0.2s, border-color 0.2s",
+} as const;
 
 export function Projects() {
   return (
@@ -54,7 +74,7 @@ export function Projects() {
           }}
           className="projects-grid"
         >
-          {projects.map((project, idx) => (
+          {featured.map((project, idx) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 28 }}
@@ -88,11 +108,28 @@ export function Projects() {
                     }}
                   >
                     {project.category}
+                    {project.client && (
+                      <span
+                        style={{
+                          marginLeft: 10,
+                          padding: "2px 8px",
+                          borderRadius: 4,
+                          border: `1px solid ${COLORS.border}`,
+                          color: COLORS.muted,
+                          letterSpacing: "0.04em",
+                          textTransform: "none",
+                          fontWeight: 500,
+                        }}
+                      >
+                        Client project
+                      </span>
+                    )}
                   </span>
                   <div style={{ display: "flex", gap: 8 }}>
                     {project.github && (
                       <a
                         href={project.github}
+                        aria-label={`${project.name} on GitHub`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -123,6 +160,7 @@ export function Projects() {
                     {project.demo && (
                       <a
                         href={project.demo}
+                        aria-label={`${project.name} live site`}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
@@ -222,7 +260,7 @@ export function Projects() {
 
               {/* Tech stack */}
               <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-                {project.tech.map((t) => (
+                {project.tech.slice(0, MAX_TECH).map((t) => (
                   <span
                     key={t}
                     style={{
@@ -238,9 +276,22 @@ export function Projects() {
                     {t}
                   </span>
                 ))}
+                {project.tech.length > MAX_TECH && (
+                  <span
+                    style={{
+                      padding: "3px 10px",
+                      color: COLORS.muted,
+                      fontSize: 12,
+                      fontFamily: "JetBrains Mono, monospace",
+                    }}
+                  >
+                    +{project.tech.length - MAX_TECH} more
+                  </span>
+                )}
               </div>
 
-              {/* Case study link */}
+              {/* Case study link (only when one exists) */}
+              {caseStudies[project.id] && (
               <Link
                 to={`/case-study/${project.id}`}
                 style={{
@@ -261,9 +312,94 @@ export function Projects() {
               >
                 View Case Study <ArrowRight size={13} />
               </Link>
+              )}
             </motion.div>
           ))}
         </div>
+
+        {/* More projects */}
+        {more.length > 0 && (
+          <div style={{ marginTop: 64 }}>
+            <h3
+              style={{
+                color: COLORS.text,
+                fontSize: 20,
+                fontWeight: 600,
+                fontFamily: "Inter, sans-serif",
+                letterSpacing: "-0.01em",
+                margin: "0 0 20px",
+              }}
+            >
+              More projects
+            </h3>
+            <div
+              style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 16 }}
+              className="more-projects-grid"
+            >
+              {more.map((project, idx) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ duration: 0.45, delay: idx * 0.05 }}
+                  style={{
+                    padding: 20,
+                    borderRadius: 12,
+                    border: `1px solid ${COLORS.border}`,
+                    backgroundColor: COLORS.bgCard,
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 10,
+                  }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
+                    <span
+                      style={{
+                        fontSize: 11,
+                        fontWeight: 600,
+                        letterSpacing: "0.08em",
+                        textTransform: "uppercase",
+                        color: categoryColors[project.category] || COLORS.accent,
+                        fontFamily: "JetBrains Mono, monospace",
+                      }}
+                    >
+                      {project.category}
+                    </span>
+                    <div style={{ display: "flex", gap: 6 }}>
+                      {project.github && (
+                        <a href={project.github} target="_blank" rel="noopener noreferrer"
+                           aria-label={`${project.name} on GitHub`} style={{ ...iconLink, width: 28, height: 28 }}>
+                          <Github size={13} />
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                           aria-label={`${project.name} live site`} style={{ ...iconLink, width: 28, height: 28 }}>
+                          <ExternalLink size={13} />
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                  <div>
+                    <div style={{ color: COLORS.text, fontSize: 16, fontWeight: 600, fontFamily: "Inter, sans-serif" }}>
+                      {project.name}
+                    </div>
+                    <div style={{ color: COLORS.accent, fontSize: 12, fontFamily: "Inter, sans-serif", opacity: 0.85, marginTop: 2 }}>
+                      {project.tagline}
+                    </div>
+                  </div>
+                  <p style={{ color: COLORS.muted, fontSize: 13, lineHeight: 1.6, fontFamily: "Inter, sans-serif", margin: 0 }}>
+                    {project.description}
+                  </p>
+                  <div style={{ color: COLORS.muted, fontSize: 11.5, fontFamily: "JetBrains Mono, monospace", opacity: 0.85 }}>
+                    {project.tech.slice(0, 5).join(" · ")}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

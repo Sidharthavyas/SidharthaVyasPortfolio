@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  githubStats as defaultStats,
-  languageDistribution as defaultLanguages,
-} from "../data/portfolio";
+import { LINKS } from "../data/portfolio";
 
 interface GitHubRepo {
   name: string;
@@ -24,11 +21,33 @@ interface GitHubEvent {
 }
 
 export interface GitHubStats {
-  totalCommits: number;
-  totalRepos: number;
-  longestStreak: number;
-  mostActiveYear: number | string;
+  totalCommits: number | null;
+  totalRepos: number | null;
+  longestStreak: number | null;
+  mostActiveYear: number | string | null;
   totalStars: number;
+}
+
+export interface ContributionDay {
+  date: string;
+  count: number;
+  level: number; // 0-4
+}
+
+/** Group daily contributions into Sunday-first weeks, padding the first week with nulls. */
+function toWeeks(days: ContributionDay[]): (ContributionDay | null)[][] {
+  if (!days.length) return [];
+  const weeks: (ContributionDay | null)[][] = [];
+  let week: (ContributionDay | null)[] = Array(new Date(days[0].date + "T00:00:00").getDay()).fill(null);
+  for (const d of days) {
+    week.push(d);
+    if (week.length === 7) {
+      weeks.push(week);
+      week = [];
+    }
+  }
+  if (week.length) weeks.push([...week, ...Array(7 - week.length).fill(null)]);
+  return weeks;
 }
 
 export interface LanguageItem {
@@ -66,7 +85,7 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Swift: "#F05138",
 };
 
-const CACHE_KEY = "gh_portfolio_data";
+const CACHE_KEY = "gh_portfolio_data_v2";
 const CACHE_DURATION = 30 * 60 * 1000; // 30 min
 
 function getCached() {
@@ -89,15 +108,16 @@ function setCache(data: any) {
   }
 }
 
-export function useGitHubData(username = "Sidharthavyas") {
+export function useGitHubData(username = LINKS.githubUsername) {
   const [stats, setStats] = useState<GitHubStats>({
-    totalCommits: defaultStats.totalCommits,
-    totalRepos: defaultStats.totalRepos,
-    longestStreak: defaultStats.longestStreak,
-    mostActiveYear: defaultStats.mostActiveYear,
+    totalCommits: null,
+    totalRepos: null,
+    longestStreak: null,
+    mostActiveYear: null,
     totalStars: 0,
   });
-  const [languages, setLanguages] = useState<LanguageItem[]>(defaultLanguages);
+  const [languages, setLanguages] = useState<LanguageItem[]>([]);
+  const [contributions, setContributions] = useState<(ContributionDay | null)[][]>([]);
   const [repos, setRepos] = useState<LiveRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -113,6 +133,7 @@ export function useGitHubData(username = "Sidharthavyas") {
         setStats(cached.stats);
         setLanguages(cached.languages);
         setRepos(cached.repos);
+        setContributions(cached.contributions || []);
         setLoading(false);
         setIsLive(true);
         return;
@@ -132,12 +153,13 @@ export function useGitHubData(username = "Sidharthavyas") {
         const eventsData: GitHubEvent[] = eventsRes.ok ? await eventsRes.json() : [];
 
         // Parse contribution data (total + daily for streak)
-        let totalContributions = defaultStats.totalCommits;
-        let longestStreak = defaultStats.longestStreak;
+        let totalContributions: number | null = null;
+        let longestStreak: number | null = null;
+        let weeks: (ContributionDay | null)[][] = [];
         try {
           if (contribRes.ok) {
             const contribData = await contribRes.json();
-            totalContributions = contribData.total?.lastYear || defaultStats.totalCommits;
+            totalContributions = contribData.total?.lastYear ?? null;
 
             // Calculate longest streak from daily data
             if (contribData.contributions && contribData.contributions.length > 0) {
@@ -152,6 +174,7 @@ export function useGitHubData(username = "Sidharthavyas") {
                 }
               }
               longestStreak = maxStreak;
+              weeks = toWeeks(contribData.contributions);
             }
           }
         } catch {
@@ -197,8 +220,7 @@ export function useGitHubData(username = "Sidharthavyas") {
           yearCount[year] = (yearCount[year] || 0) + 1;
         });
         const mostActiveYear =
-          Object.entries(yearCount).sort(([, a], [, b]) => b - a)[0]?.[0] ||
-          defaultStats.mostActiveYear;
+          Object.entries(yearCount).sort(([, a], [, b]) => b - a)[0]?.[0] ?? null;
 
         // Build live repos list
         const liveRepos: LiveRepo[] = ownRepos
@@ -217,16 +239,17 @@ export function useGitHubData(username = "Sidharthavyas") {
           totalCommits: totalContributions,
           totalRepos: ownRepos.length,
           longestStreak,
-          mostActiveYear: Number(mostActiveYear),
+          mostActiveYear: mostActiveYear ? Number(mostActiveYear) : null,
           totalStars,
         };
 
-        const result = { stats: newStats, languages: langDistribution, repos: liveRepos };
+        const result = { stats: newStats, languages: langDistribution, repos: liveRepos, contributions: weeks };
         setCache(result);
 
         setStats(newStats);
         setLanguages(langDistribution);
         setRepos(liveRepos);
+        setContributions(weeks);
         setIsLive(true);
       } catch (err: any) {
         if (!cancelled) {
@@ -244,5 +267,5 @@ export function useGitHubData(username = "Sidharthavyas") {
     };
   }, [username]);
 
-  return { stats, languages, repos, loading, error, isLive };
+  return { stats, languages, repos, contributions, loading, error, isLive };
 }

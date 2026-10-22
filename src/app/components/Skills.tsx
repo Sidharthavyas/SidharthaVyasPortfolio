@@ -5,9 +5,12 @@ const categoryColors: Record<string, string> = {
   Languages: "#22d3ee",
   Backend: "#3b82f6",
   Databases: "#a78bfa",
-  Frontend: "#34d399",
-  Infrastructure: "#f59e0b",
-  "ML & AI": "#fb7185",
+  "AI & LLMs": "#fb7185",
+  "On-device & Voice AI": "#f472b6",
+  Automation: "#f59e0b",
+  "Frontend & Mobile": "#34d399",
+  Infrastructure: "#38bdf8",
+  Security: "#94a3b8",
 };
 
 export function Skills() {

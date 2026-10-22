@@ -6,22 +6,22 @@ const pillars = [
   {
     icon: <Server size={20} />,
     title: "Backend Systems",
-    desc: "Designing scalable APIs and microservices that power production applications",
+    desc: "APIs and data layers built for correctness: transactions, state machines, auth and query performance",
   },
   {
     icon: <Zap size={20} />,
-    title: "Real-time Architecture",
-    desc: "Building event-driven systems with WebSockets, Redis pub/sub, and Socket.IO",
+    title: "Automation & Integrations",
+    desc: "Voice and WhatsApp agents, webhooks and n8n workflows that connect the tools a business already uses",
   },
   {
     icon: <Brain size={20} />,
-    title: "AI Integration",
-    desc: "Integrating ML models and LLMs into production-grade backend pipelines",
+    title: "AI & LLM Engineering",
+    desc: "Multi-agent pipelines, RAG, model fallback and on-device inference, with every output validated",
   },
   {
     icon: <Code2 size={20} />,
-    title: "Full-Stack Capability",
-    desc: "End-to-end development from React frontends to SQL-optimized backends",
+    title: "Full-Stack & Mobile",
+    desc: "Next.js on the web, React Native and Kotlin on Android, SwiftUI on iPad, shipped for real clients",
   },
 ];
 
@@ -72,10 +72,10 @@ export function About() {
 
             <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               {[
-                "Sidhartha Vyas is a software developer specializing in backend systems, scalable APIs, and real-time architectures.",
-                "He has experience building production systems used in restaurant operations — including inventory management, batch lifecycle tracking, and demand forecasting at scale for KFC operations in India.",
-                "His work focuses on designing reliable backend services, optimizing database performance, and implementing real-time event-driven systems.",
-                "He builds AI-powered applications that integrate machine learning models into production pipelines, with experience in multilingual NLP and LLM orchestration.",
+                "Sidhartha Vyas is a backend and AI engineer in Mumbai with 2+ years of production experience across backend systems, AI applications and full-stack delivery.",
+                "He built the backend for D-MPNC, an inventory platform used across multi-location KFC restaurants operated by Sapphire Foods: 20+ FastAPI APIs, FIFO stock ledgers, automated expiry handling and SQL Server reporting.",
+                "Today he builds AI automation that runs real business operations: voice sales agents and WhatsApp booking agents in Python and n8n on ElevenLabs, Exotel and WATI.",
+                "His focus is LLM systems that stay reliable and cheap: model fallback chains, on-device inference, RAG and multi-agent pipelines, with every model output validated before it is acted on.",
               ].map((text, i) => (
                 <p
                   key={i}
@@ -93,7 +93,7 @@ export function About() {
             </div>
 
             <div style={{ display: "flex", gap: 12, marginTop: 32, flexWrap: "wrap" }}>
-              {["Mumbai, India", "Open to Remote", "Backend / Full-Stack"].map((tag) => (
+              {["Mumbai, India", "Open to hybrid or remote", "Backend · AI · Automation"].map((tag) => (
                 <span
                   key={tag}
                   style={{

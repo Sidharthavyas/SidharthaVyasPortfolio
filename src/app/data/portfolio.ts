@@ -11,121 +11,264 @@ export const COLORS = {
   accentDim2: "rgba(34,211,238,0.15)",
 };
 
+// Every external link lives here so the site never has two different versions of one.
+export const LINKS = {
+  email: "vsidhartha71@gmail.com",
+  linkedin: "https://www.linkedin.com/in/sidharthavyas",
+  linkedinLabel: "linkedin.com/in/sidharthavyas",
+  github: "https://github.com/Sidharthavyas",
+  githubUsername: "Sidharthavyas",
+  whatsappNumber: "919029562156",
+  whatsappLabel: "+91 9029562156",
+  resume: "/resume/Sidhartha_Vyas_Resume.pdf",
+};
+
 export const skills = {
-  Languages: ["Python", "JavaScript", "TypeScript", "SQL"],
-  Backend: ["FastAPI", "Node.js", "Express", "REST APIs"],
-  Databases: ["SQL Server", "PostgreSQL", "MongoDB", "Redis"],
-  Frontend: ["React", "Next.js", "Tailwind CSS"],
-  Infrastructure: ["Docker", "Vercel", "Cloud Platforms"],
-  "ML & AI": ["HuggingFace Transformers", "MuRIL", "Toxic-BERT", "Gemini API"],
+  Languages: ["Python", "TypeScript", "JavaScript", "SQL", "Kotlin", "Swift"],
+  Backend: ["FastAPI", "Node.js", "Express.js", "Next.js Route Handlers", "REST APIs", "WebSockets", "Webhooks", "Cloudflare Workers"],
+  Databases: ["PostgreSQL", "SQL Server", "MongoDB", "Redis", "SQLite", "ChromaDB"],
+  "AI & LLMs": ["LangGraph", "LangChain", "RAG", "Multi-agent systems", "Model fallback & routing", "MCP", "Gemini", "OpenAI", "Groq", "RAGAS"],
+  "On-device & Voice AI": ["Gemma 3 (MediaPipe)", "whisper.cpp", "Apple Vision OCR", "ElevenLabs", "Deepgram", "Vapi", "Exotel"],
+  Automation: ["n8n", "Pabbly", "WATI (WhatsApp)", "Event-driven workflows", "Background jobs"],
+  "Frontend & Mobile": ["React", "Next.js", "React Native", "SwiftUI", "Tailwind CSS"],
+  Infrastructure: ["Docker", "AWS", "Google Cloud", "Vercel", "GitHub Actions", "Git"],
+  Security: ["JWT", "OAuth2", "Better Auth", "RBAC", "Rate limiting", "Zod validation"],
 };
 
 export const experience = [
   {
-    role: "Software Developer",
+    role: "Executive - Automation",
+    company: "Malkansview Training Institute",
+    location: "Mumbai",
+    period: "Aug 2026 – Present",
+    highlights: [
+      "Automated outbound sales calling with AI voice agents built in Python and n8n on ElevenLabs voice and Exotel telephony",
+      "Automated booking confirmations with WhatsApp agents connecting WATI and ElevenLabs through production webhooks",
+      "Automated review collection and follow-ups with Python, n8n and Pabbly workflows across WATI, Google Reviews and Trustpilot",
+      "Unified 6+ platforms into one automation stack through Python REST and webhook integrations deployed on Docker",
+    ],
+  },
+  {
+    role: "Software Developer - Backend",
     company: "DATRAX Services Pvt. Ltd.",
     location: "Mumbai",
     period: "Nov 2025 – Mar 2026",
-    deployment: "Deployed at Sapphire Foods India Ltd. for KFC operations",
+    deployment: "Deployed at Sapphire Foods India Ltd. (KFC operations)",
     highlights: [
-      "Built MPNC (Material Planning and Consumption), a backend platform for inventory tracking and demand forecasting",
-      "Implemented over 20 REST APIs using FastAPI and SQL Server",
-      "Designed FIFO inventory consumption logic and batch lifecycle management",
-      "Optimized SQL queries for production workloads",
+      "Delivered D-MPNC, a production inventory platform for multi-location KFC restaurants, by designing 20+ FastAPI REST APIs",
+      "Implemented FIFO stock ledgers, batch tracking and automated expiry handling, modelling inventory as state transitions so stock movement stays traceable per store",
+      "Gave store managers sales history, inventory and demand forecasts through SQL Server stored procedures, indexing and reports",
+      "Built role-based access with separate views for Store Managers and Cooks",
     ],
   },
   {
-    role: "Software Engineer Intern",
+    role: "Software Engineer Intern - Backend",
     company: "Translogistics Pvt. Ltd.",
     location: "Mumbai",
-    period: "Dec 2024 – Sep 2025",
+    period: "Dec 2024 – Nov 2025",
     highlights: [
-      "Developed backend APIs using Node.js",
-      "Optimized PostgreSQL queries and schemas",
-      "Collaborated with product and QA teams to improve system reliability",
+      "Built secure Node.js REST APIs and third-party integrations for a logistics CRM, enabling real-time data management",
+      "Reduced query latency across logistics workflows by optimising PostgreSQL schemas, indexes and execution plans",
     ],
   },
   {
-    role: "Software Engineer Intern",
+    role: "Software Engineer Intern - IoT & Backend",
     company: "Vighnesh.inc",
     location: "Mumbai",
     period: "Jul 2024 – Dec 2024",
     highlights: [
-      "Developed backend systems for IoT device management",
-      "Improved system precision by 30%",
-      "Reduced real-time processing latency by 40%",
+      "Improved IoT data processing accuracy by 30% by building ingestion handlers with stricter validation and fault-tolerant error handling",
     ],
   },
 ];
 
-export const projects = [
-  {
-    id: "cyberguard",
-    name: "CyberGuard",
-    tagline: "AI-Powered Cyberbullying Detection Platform",
-    description:
-      "A real-time moderation platform that detects abusive content across social platforms using machine learning models and large language model fallback.",
-    tech: ["FastAPI", "React", "Redis", "WebSockets", "MuRIL", "Toxic-BERT", "Gemini API"],
-    features: [
-      "Real-time moderation dashboard",
-      "Multilingual toxicity detection",
-      "Machine learning ensemble model",
-      "LLM fallback for uncertain predictions",
-    ],
-    github: "https://github.com/Sidharthavyas/Cyberguard---A-webapp-for-mitigating-CyberBullying",
-    demo: "https://cyberguard-a-webapp-for-mitigating.vercel.app",
-    category: "AI / Backend",
-  },
-  {
-    id: "goalsocial",
-    name: "GoalSocial",
-    tagline: "Real-time Goal Tracking Platform",
-    description:
-      "A social habit and goal tracking platform with live updates between users, powered by WebSockets and real-time event streaming.",
-    tech: ["Node.js", "Express", "Socket.IO", "MongoDB", "React"],
-    features: [
-      "Real-time activity updates",
-      "WebSocket communication",
-      "User authentication using JWT",
-      "Social goal sharing",
-    ],
-    github: "https://github.com/Sidharthavyas/GoalSocial",
-    demo: "https://goal-social.vercel.app/",
-    category: "Full-Stack",
-  },
+export type Project = {
+  id: string;
+  name: string;
+  tagline: string;
+  description: string;
+  tech: string[];
+  features: string[];
+  github: string | null;
+  demo: string | null;
+  category: string;
+  featured: boolean;
+  client?: boolean;
+};
+
+export const projects: Project[] = [
   {
     id: "mpnc",
-    name: "MPNC",
-    tagline: "Material Planning and Consumption System",
+    name: "D-MPNC",
+    tagline: "Inventory platform for multi-location KFC restaurants",
     description:
-      "An enterprise backend system used for restaurant operations, featuring inventory tracking, batch lifecycle management, expiry handling, and demand forecasting.",
-    tech: ["FastAPI", "Python", "SQL Server", "Redis"],
+      "A production backend for Material Planning & Consumption at KFC restaurants operated by Sapphire Foods. It replaced manual stock tracking with FIFO ledgers, batch tracking, automated expiry handling and demand forecasting behind 20+ FastAPI APIs.",
+    tech: ["Python", "FastAPI", "SQL Server", "T-SQL", "Stored procedures"],
     features: [
-      "Built 20+ production APIs",
-      "Ledger-style inventory tracking with FIFO logic",
-      "Batch lifecycle and expiry management",
-      "Demand forecasting engine",
+      "20+ production REST APIs",
+      "FIFO stock ledgers with inventory modelled as state transitions",
+      "Sales history, inventory and forecast reports for store managers",
+      "Role-based views for Store Managers and Cooks",
     ],
     github: null,
     demo: null,
     category: "Enterprise Backend",
+    featured: true,
+  },
+  {
+    id: "memora",
+    name: "Memora",
+    tagline: "AI handwriting notebook for iPad",
+    description:
+      "A native iPad notebook that turns a day of handwritten notes into one AI briefing, using PencilKit and on-device OCR. A Cloudflare Worker gateway keeps AI cost to one request per day of changed notes. In client testing.",
+    tech: ["Swift", "SwiftUI", "PencilKit", "Apple Vision", "SwiftData", "CloudKit", "Cloudflare Workers", "Gemini", "Groq"],
+    features: [
+      "Handwriting to text with on-device OCR",
+      "One content-hashed AI request per day; unchanged days cost nothing",
+      "3-model fallback chain with Retry-After cool-downs",
+      "Schema-validated summaries",
+    ],
+    github: null,
+    demo: null,
+    category: "AI / Mobile",
+    featured: true,
+    client: true,
+  },
+  {
+    id: "remi",
+    name: "Remi",
+    tagline: "Offline voice-first reminder app for Android",
+    description:
+      "Voice reminders that work with no internet. Speech goes through a cost-tiered pipeline: whisper.cpp, a rule-based parser, on-device Gemma 3 1B, then cloud LLMs. A native Kotlin alarm engine survives reboots, timezone changes and Doze.",
+    tech: ["React Native", "TypeScript", "Kotlin", "whisper.cpp", "Gemma 3", "Groq", "Gemini", "SQLite", "Next.js", "PostgreSQL", "Zod"],
+    features: [
+      "Offline speech-to-text and on-device LLM, with cloud fallback",
+      "Every model output validated with Zod before it creates a reminder",
+      "155 automated tests",
+      "Sync backend with idempotency keys, tombstones and last-write-wins merge",
+    ],
+    github: "https://github.com/Sidharthavyas/Remi",
+    demo: null,
+    category: "AI / Mobile",
+    featured: true,
+  },
+  {
+    id: "marketpulse",
+    name: "MarketPulse AI",
+    tagline: "Multi-agent equity research analyst",
+    description:
+      "Generates source-cited equity research reports with a 6-stage LangGraph agent pipeline that critiques its own drafts and verifies claims before publishing.",
+    tech: ["Python", "LangGraph", "FastAPI", "PostgreSQL", "Gemini API", "Tavily"],
+    features: [
+      "6-stage LangGraph agent pipeline",
+      "Self-critique and claim verification",
+      "Source-cited reports",
+    ],
+    github: "https://github.com/Sidharthavyas/Marketpulse-AI",
+    demo: null,
+    category: "AI / Agents",
+    featured: true,
+  },
+  {
+    id: "borrowbox",
+    name: "BorrowBox",
+    tagline: "Peer-to-peer borrowing marketplace",
+    description:
+      "A live marketplace for borrowing items from people nearby, with auth, listings, geo search, requests, messaging and reviews. Double-booking is prevented under concurrent requests by running the borrow lifecycle inside MongoDB transactions.",
+    tech: ["Next.js", "TypeScript", "MongoDB", "Better Auth", "Zod", "Cloudinary", "GitHub Actions"],
+    features: [
+      "9-state borrow lifecycle inside MongoDB transactions",
+      "Rate limits that hold across server instances",
+      "Upload proxy that verifies file signatures",
+      "Server-side ownership checks on every API",
+    ],
+    github: null,
+    demo: "https://borrowbox-liard.vercel.app/",
+    category: "Full-Stack",
+    featured: true,
   },
   {
     id: "nidsscrochet",
     name: "Nidsscrochet",
-    tagline: "SSR E-commerce Website",
+    tagline: "Live e-commerce store for a Mumbai crochet business",
     description:
-      "A Next.js based e-commerce storefront optimized for performance and SEO, with server-side rendering and modern UI.",
-    tech: ["Next.js", "React", "Tailwind CSS", "SSR", "Vercel"],
+      "An online store for a handmade crochet business with Razorpay payment verification, customer accounts and order tracking, built with Next.js and live since October 2025.",
+    tech: ["Next.js", "MongoDB", "Razorpay", "Cloudinary", "JWT", "Vercel"],
     features: [
-      "Server-side rendering for SEO",
-      "Vercel deployment pipeline",
-      "Optimized Lighthouse performance score",
-      "Responsive product storefront",
+      "Razorpay payments verified server-side",
+      "Customer accounts and order tracking",
+      "Cloudinary product images",
     ],
-    github: "https://github.com/Sidharthavyas/Nidsscrochet",
+    github: null,
     demo: "https://www.nidsscrochet.in/",
     category: "Full-Stack",
+    featured: true,
+    client: true,
+  },
+  {
+    id: "documind",
+    name: "DocuMind AI",
+    tagline: "RAG document assistant",
+    description:
+      "Grounded document Q&A through an end-to-end RAG pipeline behind 9 FastAPI endpoints, with a 4-provider LLM fallback and RAGAS evaluation.",
+    tech: ["Python", "FastAPI", "ChromaDB", "Sentence Transformers", "RAGAS", "React 19"],
+    features: ["Recursive chunking and embeddings", "4-provider LLM fallback", "RAGAS evaluation"],
+    github: "https://github.com/Sidharthavyas/Documind-Frontend",
+    demo: null,
+    category: "AI / Backend",
+    featured: false,
+  },
+  {
+    id: "flow",
+    name: "Flow",
+    tagline: "Personal finance tracker",
+    description:
+      "An expense, savings and investment tracker that stores money as integer paise to avoid floating-point errors, with bcrypt auth, hashed TTL sessions and per-user query scoping.",
+    tech: ["Next.js", "TypeScript", "MongoDB", "Mongoose", "Zod"],
+    features: ["Money stored as integer paise", "Hashed TTL sessions", "Per-user query scoping"],
+    github: "https://github.com/Sidharthavyas/Flow-",
+    demo: "https://flow-blush-nu.vercel.app/login",
+    category: "Full-Stack",
+    featured: false,
+  },
+  {
+    id: "ai-mock-interview",
+    name: "AI Mock Interview",
+    tagline: "Voice-first interview simulator",
+    description:
+      "Spoken interview practice with automated scoring, using a real-time voice pipeline (Vapi, Deepgram, ElevenLabs) with Gemini and Groq generating questions and feedback.",
+    tech: ["Next.js", "TypeScript", "Vapi", "Deepgram", "ElevenLabs", "Gemini", "Groq", "Firebase"],
+    features: ["Real-time voice interview loop", "AI questions and feedback", "Automated scoring"],
+    github: "https://github.com/Sidharthavyas/Ai-mock-Interview",
+    demo: "https://ai-mock-interview-phi-mauve.vercel.app/",
+    category: "AI / Voice",
+    featured: false,
+  },
+  {
+    id: "cyberguard",
+    name: "CyberGuard",
+    tagline: "AI cyberbullying detection platform",
+    description:
+      "A real-time moderation platform that detects abusive content in Hindi, Hinglish and English using a Toxic-BERT and MuRIL ensemble, escalating uncertain predictions to an LLM.",
+    tech: ["FastAPI", "React", "Redis", "WebSockets", "MuRIL", "Toxic-BERT", "Gemini API"],
+    features: ["Real-time moderation dashboard", "Multilingual toxicity detection", "LLM fallback for uncertain predictions"],
+    github: "https://github.com/Sidharthavyas/Cyberguard---A-webapp-for-mitigating-CyberBullying",
+    demo: "https://cyberguard-a-webapp-for-mitigating.vercel.app",
+    category: "AI / Backend",
+    featured: false,
+  },
+  {
+    id: "goalsocial",
+    name: "GoalSocial",
+    tagline: "Real-time goal tracking with friends",
+    description:
+      "A social habit and goal tracker with live updates between friends over WebSockets, backed by MongoDB.",
+    tech: ["Node.js", "Express", "Socket.IO", "MongoDB", "React", "JWT"],
+    features: ["Real-time activity updates", "Socket.IO rooms per user's friends", "JWT authentication"],
+    github: "https://github.com/Sidharthavyas/GoalSocial",
+    demo: "https://goal-social.vercel.app/",
+    category: "Full-Stack",
+    featured: false,
   },
 ];
 
@@ -137,138 +280,111 @@ export const caseStudies: Record<string, {
   impact: string[];
   diagram?: { nodes: string[]; arrows: string[][] };
 }> = {
-  cyberguard: {
-    problem:
-      "Social media platforms face a significant challenge in detecting and moderating abusive, toxic, or cyberbullying content at scale. Manual moderation is slow and doesn't scale, while simplistic keyword filtering produces too many false positives. The goal was to build an intelligent, real-time moderation engine capable of handling multilingual content.",
-    architecture:
-      "CyberGuard uses a layered ML pipeline. Incoming content is first processed by a fast ensemble of Toxic-BERT and MuRIL models for low-latency classification. Uncertain predictions (low confidence scores) are escalated to Gemini API for deeper semantic analysis. Results are pushed in real-time via WebSockets to the moderation dashboard. Redis is used for job queuing and caching frequent predictions.",
-    decisions: [
-      "Chose FastAPI over Flask for native async support, critical for WebSocket throughput and concurrent model inference",
-      "Used MuRIL for multilingual support to handle Hindi/Hinglish content common in Indian social platforms",
-      "Implemented LLM fallback (Gemini) only for borderline cases to minimize latency and API cost",
-      "Redis pub/sub for broadcasting real-time moderation events to connected dashboard clients",
-    ],
-    challenges: [
-      "Balancing model accuracy vs inference latency for real-time use cases",
-      "Handling code-switched text (Hindi + English) with standard English-only models",
-      "Managing WebSocket connections at scale with async FastAPI workers",
-      "Designing a confidence threshold that minimizes both false positives and false negatives",
-    ],
-    impact: [
-      "End-to-end moderation pipeline with sub-200ms average response time",
-      "Multilingual detection supporting Hindi, Hinglish, and English content",
-      "Modular architecture allowing easy model swapping and A/B testing",
-      "Deployed on Vercel with live demo demonstrating real-time moderation",
-    ],
-  },
-  goalsocial: {
-    problem:
-      "Habit tracking apps lack social accountability, which research shows is critical for goal completion. The challenge was to build a platform where users could share goals, track progress, and receive live encouragement from peers — all in real-time without page refreshes.",
-    architecture:
-      "GoalSocial is a MERN stack application with Socket.IO for real-time bi-directional communication. The backend uses Node.js with Express, with MongoDB storing user profiles, goals, and activity feeds. JWT authentication secures API routes. Socket.IO rooms are used to scope real-time updates per user's follower network.",
-    decisions: [
-      "Chose Socket.IO over raw WebSockets for built-in reconnection logic and room management",
-      "MongoDB document model suits the flexible, nested structure of goal and activity data",
-      "JWT-based stateless auth chosen to avoid session store complexity at early scale",
-      "Event-driven activity feed design ensures followers receive updates without polling",
-    ],
-    challenges: [
-      "Designing real-time event broadcasting scoped to follower graphs efficiently",
-      "Managing Socket.IO rooms dynamically as users follow/unfollow each other",
-      "Preventing duplicate event delivery on reconnection",
-      "Structuring MongoDB schemas for efficient timeline queries",
-    ],
-    impact: [
-      "Real-time activity updates with zero polling — purely event-driven",
-      "Sub-100ms message delivery for in-room events",
-      "JWT auth with refresh token rotation for secure long-lived sessions",
-      "Scalable room-based event scoping for social graph updates",
-    ],
-  },
   mpnc: {
     problem:
-      "KFC restaurant operations across India require precise inventory management at scale. Ingredients expire, batches need to be consumed in FIFO order, and demand forecasting is critical to avoid waste and stockouts. The existing systems lacked real-time visibility and programmatic lifecycle tracking for batches.",
+      "Multi-location KFC restaurants tracked stock by hand. Ingredients expire, batches must be used in FIFO order, and store managers need sales history and demand forecasts to plan, but there was no system giving per-store, traceable stock movement.",
     architecture:
-      "MPNC is a FastAPI-based backend system connected to SQL Server. The API layer exposes 20+ endpoints for inventory operations. A FIFO engine processes consumption requests by querying active batches ordered by creation timestamp. Redis caches frequently accessed inventory state for read-heavy dashboard endpoints. The system is deployed in a production environment serving live KFC operations.",
+      "A FastAPI backend over SQL Server exposes 20+ REST endpoints for inventory, consumption and reporting. Inventory is modelled as a FIFO ledger of batches, and every stock change, including expiry, is a state transition, so movement stays traceable per store. Reporting runs through SQL Server stored procedures, and role-based access gives Store Managers and Cooks different operational views.",
     decisions: [
-      "FastAPI chosen for high-throughput async I/O and automatic OpenAPI documentation for team collaboration",
-      "SQL Server used to match existing enterprise infrastructure at Sapphire Foods",
-      "FIFO consumption logic implemented at the database layer using window functions for correctness under concurrent writes",
-      "Redis caching layer added for inventory dashboard read endpoints to reduce SQL Server load",
+      "Modelled inventory as state transitions so every unit of stock can be traced from receipt to consumption or expiry",
+      "Used a FIFO ledger for batches so the oldest stock is consumed first",
+      "Put reporting logic in SQL Server stored procedures with indexing and query tuning, close to the data",
+      "Separated permissions and views for Store Managers and Cooks",
     ],
     challenges: [
-      "Implementing FIFO batch consumption correctly under concurrent API requests to prevent race conditions",
-      "Optimizing complex SQL queries joining inventory, batch, and consumption ledger tables",
-      "Designing a ledger-style audit trail that could not be retroactively modified",
-      "Handling batch expiry edge cases within active consumption pipelines",
+      "Keeping per-store stock correct as batches are received, consumed and expire",
+      "Serving sales history, inventory and forecast reports fast enough for daily planning",
     ],
     impact: [
-      "20+ REST APIs powering live KFC restaurant operations across multiple locations",
-      "Ledger-style inventory tracking with full audit trail",
-      "FIFO consumption logic eliminating manual batch selection errors",
-      "Demand forecasting module reducing ingredient waste through predictive restocking",
+      "Replaced manual stock tracking for multi-location KFC restaurants",
+      "20+ production REST APIs",
+      "Store managers see sales history, inventory and demand forecasts in one place",
     ],
+  },
+  memora: {
+    problem:
+      "A client wanted handwritten iPad notes turned into a daily AI briefing, without AI costs growing with every note or the feature breaking when free-tier quotas run out.",
+    architecture:
+      "PencilKit captures handwriting and Apple Vision runs OCR on-device. Notes are stored in SwiftData and synced with CloudKit. Once a day, all changed notes are batched into a single content-hashed request to a Cloudflare Worker gateway, which calls Gemini and falls back to Groq, respecting Retry-After cool-downs and validating the response schema.",
+    decisions: [
+      "OCR on-device so handwriting never needs a server round-trip",
+      "One content-hashed request per day: unchanged days cost nothing",
+      "A Cloudflare Worker gateway so API keys never ship in the app and providers can change without an app update",
+      "A 3-model fallback chain with Retry-After cool-downs to stay available past free-tier quotas",
+    ],
+    challenges: [
+      "Keeping AI cost predictable for a client on free-tier APIs",
+      "Handling quota errors without the briefing silently failing",
+    ],
+    impact: [
+      "AI calls capped at one per day of changed notes",
+      "Summaries stay available when a provider's free quota runs out",
+      "In client testing",
+    ],
+  },
+  remi: {
+    problem:
+      "Voice reminders usually need the internet and cloud speech APIs, and phone alarms often fail after reboots, timezone changes or battery-saving Doze mode.",
+    architecture:
+      "Speech goes through a cost-tiered pipeline: whisper.cpp transcribes offline, a rule-based parser handles simple phrases, on-device Gemma 3 1B INT4 (MediaPipe) handles harder ones on capable phones, and Groq or Gemini are the last resort. Every model output is validated with Zod schemas and semantic checks. A native Kotlin engine on SQLite and AlarmManager schedules alarms, and a Next.js + PostgreSQL backend syncs reminders across devices.",
+    decisions: [
+      "Cheapest-first pipeline: rules before on-device model before cloud model",
+      "Validate every LLM output with Zod and semantic checks, with one repair attempt per provider, before creating a reminder",
+      "Native Kotlin alarm engine instead of JavaScript timers so alarms survive reboots, DST and Doze",
+      "Sync with idempotency keys, tombstones and last-write-wins merge so retries and deletes stay consistent",
+    ],
+    challenges: [
+      "Running speech recognition and an LLM on-device within phone memory limits",
+      "Making alarms fire reliably across reboots, timezone/DST changes and Doze",
+      "Stopping a wrong model output from creating a wrong reminder",
+    ],
+    impact: [
+      "Voice reminders that work fully offline",
+      "Alarms that survive reboots, DST changes and Doze",
+      "155 automated tests",
+    ],
+  },
+  marketpulse: {
+    problem:
+      "LLM-written research reports often contain unsupported or invented claims, which makes them unusable for investment research.",
+    architecture:
+      "A 6-stage LangGraph agent pipeline served through FastAPI researches a company with Tavily web search, drafts a report with Gemini, critiques its own draft and verifies claims against sources before producing a source-cited report. PostgreSQL stores results.",
+    decisions: [
+      "Separate agent stages instead of one long prompt, so each step can be checked",
+      "A self-critique stage before publishing",
+      "Claim verification against retrieved sources, with citations in the final report",
+    ],
+    challenges: [
+      "Stopping unsupported claims from reaching the final report",
+      "Keeping each agent stage's output structured enough for the next stage to check",
+    ],
+    impact: ["Source-cited equity research reports", "Claims checked against sources before publishing"],
+  },
+  borrowbox: {
+    problem:
+      "In a borrowing marketplace, two people can request the same item for overlapping dates at the same moment. Without care, both requests succeed and the item gets double-booked.",
+    architecture:
+      "A Next.js and TypeScript app on MongoDB. Each borrow moves through a 9-state lifecycle, and every transition runs inside a MongoDB transaction that rechecks overlapping bookings before committing. Every API checks ownership server-side and validates input with Zod. Rate limits are stored in MongoDB so they hold across instances, and uploads go through a Cloudinary proxy that verifies file signatures.",
+    decisions: [
+      "Recheck overlaps inside the transaction rather than before it, closing the race window",
+      "An explicit 9-state lifecycle so invalid transitions are rejected",
+      "Database-backed rate limits instead of in-memory ones, so they work across multiple server instances",
+      "Verify file signatures on upload instead of trusting file extensions",
+    ],
+    challenges: ["Preventing double-booking under concurrent requests", "Securing every endpoint consistently"],
+    impact: ["No double-booking under concurrent requests", "Live marketplace with auth, geo search, messaging and reviews"],
   },
   nidsscrochet: {
     problem:
-      "A small handcraft business needed an online storefront that was fast, SEO-friendly, and easy to maintain. Client-side rendered SPAs had poor SEO out of the box, limiting organic discoverability. The goal was to build a modern e-commerce experience with server-side rendering.",
+      "A Mumbai crochet business needed its own online store with secure payments instead of selling only through social media.",
     architecture:
-      "Built on Next.js App Router with server-side rendering for all product pages. Static generation is used for catalog pages while dynamic routes handle individual product pages. Tailwind CSS provides the design system. Deployed on Vercel with edge caching for globally fast page loads.",
+      "A Next.js storefront on Vercel with MongoDB for products, accounts and orders, Cloudinary for product images, JWT customer accounts, and Razorpay payments verified server-side before an order is confirmed.",
     decisions: [
-      "Next.js chosen over plain React for built-in SSR, file-based routing, and image optimization",
-      "Vercel deployment for zero-config edge caching and CI/CD pipeline",
-      "Tailwind CSS for rapid, consistent UI development without custom CSS overhead",
-      "Server Components used for product listings to minimize client-side JavaScript bundle",
+      "Server-side Razorpay payment verification so orders can't be faked from the browser",
+      "Cloudinary for image hosting and optimisation",
+      "Vercel for simple deploys the client doesn't have to manage",
     ],
-    challenges: [
-      "Balancing static generation vs server-side rendering for product catalog freshness",
-      "Optimizing images for web without losing quality on handcraft product photos",
-      "Achieving high Lighthouse performance scores while maintaining rich UI",
-      "Designing an intuitive product browsing experience for non-technical end users",
-    ],
-    impact: [
-      "Live production e-commerce site deployed on Vercel",
-      "SEO-optimized pages with server-side rendered meta tags",
-      "Fast page loads with Vercel edge caching",
-      "Clean, responsive UI accessible on mobile and desktop",
-    ],
+    challenges: ["Making payments trustworthy for a small business", "Keeping the store simple for a non-technical owner"],
+    impact: ["Live store at nidsscrochet.in since October 2025", "Payments, accounts and order tracking in production"],
   },
 };
-
-// Generate mock GitHub contribution data
-export function generateContributionData() {
-  const weeks = 52;
-  const days = 7;
-  const data: number[][] = [];
-  for (let w = 0; w < weeks; w++) {
-    const week: number[] = [];
-    for (let d = 0; d < days; d++) {
-      // Create realistic-looking contribution patterns
-      const isWeekend = d === 0 || d === 6;
-      const rand = Math.random();
-      let level = 0;
-      if (rand > (isWeekend ? 0.7 : 0.4)) level = 1;
-      if (rand > (isWeekend ? 0.85 : 0.6)) level = 2;
-      if (rand > (isWeekend ? 0.93 : 0.78)) level = 3;
-      if (rand > (isWeekend ? 0.97 : 0.9)) level = 4;
-      week.push(level);
-    }
-    data.push(week);
-  }
-  return data;
-}
-
-export const githubStats = {
-  totalCommits: 468,
-  totalRepos: 10,
-  longestStreak: 34,
-  mostActiveYear: 2025,
-};
-
-export const languageDistribution = [
-  { name: "Python", value: 38, color: "#3b82f6" },
-  { name: "TypeScript", value: 27, color: "#22d3ee" },
-  { name: "JavaScript", value: 22, color: "#f59e0b" },
-  { name: "SQL", value: 10, color: "#a78bfa" },
-  { name: "Other", value: 3, color: "#475569" },
-];

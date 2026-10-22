@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Github, Linkedin, Mail } from "lucide-react";
-import { COLORS } from "../data/portfolio";
+import { COLORS, LINKS } from "../data/portfolio";
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -124,7 +124,7 @@ export function Navigation() {
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <div className="nav-desktop" style={{ gap: 4, display: "flex" }}>
                 <a
-                  href="https://github.com/Sidharthavyas"
+                  href={LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -151,7 +151,7 @@ export function Navigation() {
                   <Github size={16} />
                 </a>
                 <a
-                  href="https://www.linkedin.com/in/sidhartha-vyas/"
+                  href={LINKS.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   style={{
@@ -245,13 +245,13 @@ export function Navigation() {
               </button>
             ))}
             <div style={{ display: "flex", gap: 12, marginTop: 20 }}>
-              <a href="https://github.com/Sidharthavyas" target="_blank" rel="noopener noreferrer" style={{ color: COLORS.muted }}>
+              <a href={LINKS.github} target="_blank" rel="noopener noreferrer" style={{ color: COLORS.muted }}>
                 <Github size={20} />
               </a>
-              <a href="https://www.linkedin.com/in/sidhartha-vyas/" target="_blank" rel="noopener noreferrer" style={{ color: COLORS.muted }}>
+              <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" style={{ color: COLORS.muted }}>
                 <Linkedin size={20} />
               </a>
-              <a href="mailto:vsidhartha71@gmail.com" style={{ color: COLORS.muted }}>
+              <a href={`mailto:${LINKS.email}`} style={{ color: COLORS.muted }}>
                 <Mail size={20} />
               </a>
             </div>

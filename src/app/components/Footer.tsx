@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react";
-import { COLORS } from "../data/portfolio";
+import { COLORS, LINKS } from "../data/portfolio";
 
 export function Footer() {
   return (
@@ -39,15 +39,15 @@ export function Footer() {
             SV
           </div>
           <span style={{ color: COLORS.muted, fontSize: 13, fontFamily: "Inter, sans-serif" }}>
-            © 2025 Sidhartha Vyas. All rights reserved.
+            © {new Date().getFullYear()} Sidhartha Vyas. All rights reserved.
           </span>
         </div>
 
         <div style={{ display: "flex", gap: 8 }}>
           {[
-            { icon: <Github size={15} />, href: "https://github.com/Sidharthavyas" },
-            { icon: <Linkedin size={15} />, href: "https://www.linkedin.com/in/sidhartha-vyas/" },
-            { icon: <Mail size={15} />, href: "mailto:vsidhartha71@gmail.com" },
+            { icon: <Github size={15} />, href: LINKS.github },
+            { icon: <Linkedin size={15} />, href: LINKS.linkedin },
+            { icon: <Mail size={15} />, href: `mailto:${LINKS.email}` },
           ].map((link, i) => (
             <a
               key={i}

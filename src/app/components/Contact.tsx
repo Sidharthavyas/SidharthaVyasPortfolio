@@ -1,27 +1,27 @@
 import { motion } from "motion/react";
 import { Mail, Linkedin, MapPin, ArrowRight, Briefcase, MessageCircle } from "lucide-react";
-import { COLORS } from "../data/portfolio";
+import { COLORS, LINKS } from "../data/portfolio";
 
 const contactLinks = [
   {
     icon: <Mail size={20} />,
     label: "Email",
-    value: "vsidhartha71@gmail.com",
-    href: "mailto:vsidhartha71@gmail.com",
+    value: LINKS.email,
+    href: `mailto:${LINKS.email}`,
     cta: "Send an email",
   },
   {
     icon: <Linkedin size={20} />,
     label: "LinkedIn",
-    value: "linkedin.com/in/sidhartha-vyas",
-    href: "https://www.linkedin.com/in/sidhartha-vyas/",
+    value: LINKS.linkedinLabel,
+    href: LINKS.linkedin,
     cta: "Connect on LinkedIn",
   },
   {
     icon: <MessageCircle size={20} />,
     label: "WhatsApp",
-    value: "+91 9029562156",
-    href: "https://wa.me/919029562156",
+    value: LINKS.whatsappLabel,
+    href: `https://wa.me/${LINKS.whatsappNumber}`,
     cta: "Message on WhatsApp",
   },
   {
@@ -33,18 +33,18 @@ const contactLinks = [
   },
 ];
 
-const emailSubject = encodeURIComponent("Job Opportunity - Let's Connect");
+const emailSubject = encodeURIComponent("Engineering role - let's talk");
 const emailBody = encodeURIComponent(
-  "Hi Sidhartha,\n\nI came across your portfolio and I'm impressed by your work in backend engineering and AI integration.\n\nI'd like to discuss a potential opportunity that might be a great fit for your skills.\n\nLooking forward to connecting!\n\nBest regards"
+  "Hi Sidhartha,\n\nI saw your portfolio and would like to talk about a role on our team.\n\nRole:\nCompany:\nA good time to talk:\n\nThanks,"
 );
-const GMAIL_URL = "https://mail.google.com/mail/?view=cm&to=vsidhartha71@gmail.com&su=" + emailSubject + "&body=" + emailBody;
+const GMAIL_URL = `https://mail.google.com/mail/?view=cm&to=${LINKS.email}&su=` + emailSubject + "&body=" + emailBody;
 
 const quickActions = [
   {
     icon: <Briefcase size={22} />,
     label: "Job Opportunity",
     description: "Interested in hiring? Send a pre-written email",
-    href: "mailto:vsidhartha71@gmail.com?subject=" + emailSubject + "&body=" + emailBody,
+    href: `mailto:${LINKS.email}?subject=` + emailSubject + "&body=" + emailBody,
     color: "#3b82f6",
     bgColor: "rgba(59,130,246,0.08)",
     borderColor: "rgba(59,130,246,0.15)",
@@ -54,7 +54,7 @@ const quickActions = [
     icon: <MessageCircle size={22} />,
     label: "Just Say Hi 👋",
     description: "Quick chat on WhatsApp, no formalities",
-    href: "https://wa.me/919029562156?text=Hey%20Sidhartha!%20Saw%20your%20portfolio%20and%20wanted%20to%20connect%20%F0%9F%91%8B",
+    href: `https://wa.me/${LINKS.whatsappNumber}?text=Hey%20Sidhartha!%20Saw%20your%20portfolio%20and%20wanted%20to%20connect%20%F0%9F%91%8B`,
     color: "#25D366",
     bgColor: "rgba(37,211,102,0.08)",
     borderColor: "rgba(37,211,102,0.15)",
@@ -138,7 +138,7 @@ export function Contact() {
 
             {/* Just Say Hi Card */}
             <motion.a
-              href="https://wa.me/919029562156?text=Hey%20Sidhartha!%20Saw%20your%20portfolio%20and%20wanted%20to%20connect%20%F0%9F%91%8B"
+              href={`https://wa.me/${LINKS.whatsappNumber}?text=Hey%20Sidhartha!%20Saw%20your%20portfolio%20and%20wanted%20to%20connect%20%F0%9F%91%8B`}
               target="_blank"
               rel="noopener noreferrer"
               initial={{ opacity: 0, y: 16 }}

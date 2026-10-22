@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
 import { ArrowDown, FileText } from "lucide-react";
-import { COLORS } from "../data/portfolio";
+import { COLORS, LINKS } from "../data/portfolio";
 
-const words = ["backend systems", "scalable APIs", "real-time platforms", "AI-powered tools"];
+const words = ["production APIs", "AI voice agents", "LLM pipelines", "on-device AI"];
 
 export function Hero() {
   const wordRef = useRef<HTMLSpanElement>(null);
@@ -104,7 +104,7 @@ export function Hero() {
             letterSpacing: "0.02em",
           }}
         >
-          Available for backend engineering roles
+          Available for backend, AI & automation roles
         </span>
       </motion.div>
 
@@ -147,7 +147,7 @@ export function Hero() {
           lineHeight: 1.6,
         }}
       >
-        Software Developer focused on{" "}
+        Backend & AI engineer building{" "}
         <span
           ref={wordRef}
           style={{
@@ -157,7 +157,7 @@ export function Hero() {
             minWidth: 180,
           }}
         >
-          backend systems
+          production APIs
         </span>
       </motion.p>
 
@@ -174,8 +174,8 @@ export function Hero() {
           maxWidth: 520,
         }}
       >
-        Building reliable backend systems, real-time architectures, and
-        AI-powered platforms.
+        APIs behind multi-location KFC restaurants, AI agents that run
+        real business operations, and LLM apps that stay reliable and cheap.
       </motion.p>
 
       {/* CTAs */}
@@ -193,7 +193,7 @@ export function Hero() {
         className="hero-ctas"
       >
         <a
-          href="/resume/Sidhartha_Vyas_Resume.pdf"
+          href={LINKS.resume}
           download="Sidhartha_Vyas_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
@@ -235,8 +235,8 @@ export function Hero() {
       >
         {[
           { value: "20+", label: "Production APIs" },
-          { value: "3+", label: "Systems Built" },
-          { value: "40%", label: "Latency Reduction" },
+          { value: "6+", label: "Platforms automated" },
+          { value: "155", label: "Automated tests" },
         ].map((stat) => (
           <div key={stat.label} style={{ textAlign: "center" }}>
             <div
