@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import { ArrowDown, FileText } from "lucide-react";
-import { COLORS, LINKS } from "../data/portfolio";
+import { ArrowDown, ArrowRight } from "lucide-react";
+import { COLORS } from "../data/portfolio";
 
 const words = ["production APIs", "AI voice agents", "LLM pipelines", "on-device AI"];
 
@@ -46,6 +46,7 @@ export function Hero() {
       <div
         style={{
           position: "absolute",
+          pointerEvents: "none",
           inset: 0,
           backgroundImage: `
             linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
@@ -193,10 +194,7 @@ export function Hero() {
         className="hero-ctas"
       >
         <a
-          href={LINKS.resume}
-          download="Sidhartha_Vyas_Resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#projects"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -216,7 +214,30 @@ export function Hero() {
           onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
         >
-          <FileText size={15} /> Download Resume
+          View projects <ArrowRight size={15} />
+        </a>
+        <a
+          href="#contact"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            padding: "12px 28px",
+            borderRadius: 8,
+            backgroundColor: "transparent",
+            color: COLORS.text,
+            fontSize: 14,
+            fontWeight: 600,
+            fontFamily: "Inter, sans-serif",
+            border: `1px solid ${COLORS.border}`,
+            cursor: "pointer",
+            transition: "border-color 0.2s, color 0.2s",
+            textDecoration: "none",
+          }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = COLORS.accent)}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = COLORS.border)}
+        >
+          Get in touch
         </a>
       </motion.div>
 

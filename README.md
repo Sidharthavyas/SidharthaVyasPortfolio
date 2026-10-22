@@ -14,7 +14,7 @@ Almost everything lives in **`src/app/data/portfolio.ts`**:
 
 | What | Where |
 |---|---|
-| Email, LinkedIn, GitHub, WhatsApp, resume path | `LINKS` (used by every component) |
+| Email, LinkedIn, GitHub, WhatsApp | `LINKS` (used by every component) |
 | Skills | `skills` (new category? add a color in `components/Skills.tsx`) |
 | Work history | `experience` (newest first; the first entry is highlighted) |
 | Projects | `projects`. `featured: true` puts it in the big cards; `client: true` adds the "Client project" badge |
@@ -24,7 +24,6 @@ Other places:
 
 - Hero headline, rotating words and stats: `src/app/components/Hero.tsx`
 - About text and the four pillars: `src/app/components/About.tsx`
-- Resume download: replace `public/resume/Sidhartha_Vyas_Resume.pdf` (keep the filename)
 - Page title, description and share preview: `index.html` and `public/og.png` (1200x630)
 
 GitHub stats, the contribution calendar and the language chart load live from GitHub. If GitHub

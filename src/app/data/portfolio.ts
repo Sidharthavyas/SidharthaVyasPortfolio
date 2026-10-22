@@ -20,7 +20,6 @@ export const LINKS = {
   githubUsername: "Sidharthavyas",
   whatsappNumber: "919029562156",
   whatsappLabel: "+91 9029562156",
-  resume: "/resume/Sidhartha_Vyas_Resume.pdf",
 };
 
 export const skills = {
